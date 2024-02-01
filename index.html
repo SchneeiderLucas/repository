@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Futurista curso </title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #282c34;
+      color: #61dafb;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #calculator {
+      background-color: #444;
+      border: 1px solid #61dafb;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    input, button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #61dafb;
+      color: #282c34;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input {
+      width: calc(100% - 20px);
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    #response {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    button:hover {
+      background-color: #4fa3d1;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="calculator">
+
+    <h2>Calculadora Futurista</h2>
+
+    <input type="text" id="result" disabled>
+    <div id="response"></div>
+    <br>
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="appendToDisplay('1')">1</button>
+    <button onclick="appendToDisplay('2')">2</button>
+    <button onclick="appendToDisplay('3')">3</button>
+    <button onclick="operate('+')">+</button>
+    <br>
+    <button onclick="appendToDisplay('4')">4</button>
+    <button onclick="appendToDisplay('5')">5</button>
+    <button onclick="appendToDisplay('6')">6</button>
+    <button onclick="operate('-')">-</button>
+    <br>
+    <button onclick="appendToDisplay('7')">7</button>
+    <button onclick="appendToDisplay('8')">8</button>
+    <button onclick="appendToDisplay('9')">9</button>
+    <button onclick="operate('*')">*</button>
+    <br>
+    <button onclick="appendToDisplay('0')">0</button>
+    <button onclick="operate('/')">/</button>
+    <button onclick="calculate()">=</button>
+
+  </div>
+
+  <script>
+    let displayValue = '';
+
+    function appendToDisplay(value) {
+      displayValue += value;
+      document.getElementById('result').value = displayValue;
+      document.getElementById('response').innerText = '';
+    }
+
+    function clearDisplay() {
+      displayValue = '';
+      document.getElementById('result').value = displayValue;
+      document.getElementById('response').innerText = '';
+    }
+
+    function operate(operator) {
+      if (displayValue !== '') {
+        displayValue += operator;
+        document.getElementById('result').value = displayValue;
+        document.getElementById('response').innerText = '';
+      }
+    }
+
+    function calculate() {
+      if (displayValue !== '') {
+        try {
+          const result = eval(displayValue).toString();
+          document.getElementById('response').innerText = `Resultado: ${result}`;
+          document.getElementById('result').value = result;
+        } catch (error) {
+          document.getElementById('response').innerText = 'Erro';
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
